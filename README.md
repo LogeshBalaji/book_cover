@@ -29,6 +29,46 @@ Insert the images in their appropriate places.
 Publish the website in the LocalHost.
 
 # PROGRAM:
+## urls.py(server1)  
+from django.urls import path  
+
+from.import views  
+
+urlpatterns=[  
+    path('',views.home,name='home')  
+]  
+## views.py(server1)  
+~~~
+from django.shortcuts import render    
+from django.http import HttpResponse  
+#Create your views here.  
+
+def home(request):  
+    return render(request, 'home.html') 
+content="""
+    """
+ class Myserver(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("Get request received...")
+        self.send_response(200)
+        self.send_header("content-type","text/html")
+        self.end_headers()
+        self.wfile.write(content.encode())
+print("This is my webserver")
+server_address =('',8000)
+Httpd = HTTPServer(server_address,Myserver)
+Httpd.serve_forever()
+~~~   
+## urls.py(server)
+from django.contrib import admin  
+from django.urls import path,include  
+
+urlpatterns = [  
+    path('', include('server1.urls')),  
+    path('admin/', admin.site.urls),  
+]  
+## creating new folder templates in that new html file 'home'
+
 ~~~
 <link rel="stylesheet" href="black-screen.jpg">
 <div class="book">
@@ -64,7 +104,10 @@ Publish the website in the LocalHost.
 ~~~
 
 # OUTPUT:
-![Screenshot 2024-11-27 003302](https://github.com/user-attachments/assets/d2fbe05f-4838-445e-a2b5-8c8bda69e314)
+![Screenshot 2024-12-06 104921](https://github.com/user-attachments/assets/4a9e15c5-c659-4f0f-9deb-1eaca82fd5f9)
+![Screenshot 2024-12-06 104907](https://github.com/user-attachments/assets/0c29f5ad-430d-409f-85ce-83ebb162d88e)
+![Screenshot 2024-12-06 104638](https://github.com/user-attachments/assets/199c4939-60af-469e-b98c-572f2d06c993)
+
 
 
 # RESULT:
